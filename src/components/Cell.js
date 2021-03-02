@@ -1,14 +1,19 @@
-import React from "react";
+import React from 'react';
+
+const getValue = (value) => {
+  if (value === null) return '';
+  return value ? 'X' : '0';
+};
 
 export default class Cell extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
+    const { value } = this.props;
     return (
-      <div className="cell">
-        {this.props.number}
+      <div
+        className={(value !== null ? 'disabled' : '') + ' cell'}
+        onClick={this.props.onClick}
+      >
+        {getValue(value)}
       </div>
     );
   }
