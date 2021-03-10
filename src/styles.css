@@ -1,3 +1,6 @@
+.App {
+  font-family: sans-serif;
+}
 .row {
   display: flex;
 }
@@ -22,6 +25,17 @@
   pointer-events: none;
 }
 
-.cell:not(.disabled) {
+.cell:not(.disabled),
+button:not(.disabled) {
   cursor: pointer;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  width: 156px;
+}
+
+.controls button {
+  margin-top: 5px;
 }
