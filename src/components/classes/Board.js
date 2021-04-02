@@ -1,13 +1,9 @@
 import React from "react";
 import Cell from "./Cell";
-import Controls from "./Controls";
-import Header from "./Header";
-import { initialState, winningCombs } from "../constants";
-import { createCombination } from "../utils";
-
-const isEndGame = (cells) => {
-  return !cells.includes(null);
-};
+import Controls from "../common/Controls";
+import Header from "../common/Header";
+import { initialState } from "../../constants";
+import { createCombination, checkIsEndGame, isWinnerExists } from "../../utils";
 
 export default class Board extends React.Component {
   state = initialState;
@@ -21,21 +17,12 @@ export default class Board extends React.Component {
     let newCells = [...cells];
     newCells[index] = isXNext ? true : false;
     let comb = createCombination(isXNext, newCells);
-    if (this.isWinnerExists(comb)) {
+    if (isWinnerExists(comb)) {
       this.setState({ isEndGame: true, winner: !isXNext });
-    } else if (isEndGame(newCells)) {
+    } else if (checkIsEndGame(newCells)) {
       this.setState({ isEndGame: true });
     }
     this.setState((pr) => ({ isXNext: !pr.isXNext, cells: newCells }));
-  }
-
-  isWinnerExists(comb) {
-    if (comb.length < 3) return false;
-    const areArraysEqual = (row) => {
-      return row.every((val) => comb.includes(val));
-    };
-
-    return winningCombs.some(areArraysEqual);
   }
 
   randomMove() {

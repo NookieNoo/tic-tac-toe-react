@@ -23,6 +23,7 @@
 
 .disabled {
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .cell:not(.disabled),
